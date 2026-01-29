@@ -5,6 +5,7 @@ const requestLogger = require("./middleware/requestLogger");
 const latency = require("./middleware/latency");
 const forceError = require("./middleware/forceError");
 const randomFailure = require("./middleware/randomFailure");
+const cors = require('cors');
 
 const app = express();
 
@@ -13,6 +14,9 @@ app.use(requestLogger);
 app.use(latency);
 app.use(forceError);
 app.use(randomFailure);
+app.use(cors({
+  origin: 'http://localhost:5173'
+}));
 
 // Routes
 app.use("/products", productRoutes);
